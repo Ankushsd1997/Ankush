@@ -86,4 +86,90 @@ ALTER TABLE ITEM DROP CONSTRAINT ITEMCODE_PK;      *******CONSTRAINT NOT DROP HE
 
 SELECT * FROM ITEM;    // FOR DISPLY PURPOSE ONLY
 
-----(3)
+Collaborative Assignments 2:
+CREATE TABLE SHOPPER(
+Shopperid NUMBER PRIMARY KEY,
+ShopperName VARCHAR2(20) NOT NULL,
+Gender CHAR(6) CHECK(Gender IN('Male', 'Female')),
+MobileNo NUMBER NOT NULL,
+Address VARCHAR2(50));
+
+Collaborative Assignments 3:
+ALTER TABLE Shopper MODIFY MobileNo VARCHAR2(15);
+
+Assignment 1:
+CREATE TABLE Article(
+ArCode CHAR(5)  PRIMARY KEY,
+ArName VARCHAR2(30) NOT NULL,
+Rate  NUMBER(8,2),
+Quantity NUMBER(4)  DEFAULT 0, 
+CHECK(Quantity>=0),
+CHECK(ArCode LIKE 'A%'),        // if more than one constraint then decide one at table level
+Class  CHAR(1) CHECK(Class IN('A','B','C')));
+
+Assignment 5:
+CREATE TABLE STORE(
+Name VARCHAR2(20) PRIMARY KEY,
+Location VARCHAR2(30) NOT NULL,
+ManagerName VARCHAR2(30) UNIQUE)
+
+Assignment 6:
+ALTER TABLE STORE RENAME COLUMN NAME TO STORENAME;
+
+Assignment 7:
+CREATE TABLE BILL(
+BillNo NUMBER PRIMARY KEY,
+StoreName VARCHAR2(20) REFERENCES STORE(StoreName),
+Shopperid NUMBER REFERENCES SHOPPER(Shopperid),
+ArCode CHAR(5) REFERENCES ARTICLE(ArCode),
+Amount NUMBER,
+BillDate DATE,
+Quantity NUMBER(4) DEFAULT 1,
+CHECK(Quantity>0))
+
+Assignment 8:
+CREATE TABLE SUPPLIER(
+Supplierid VARCHAR2(6) PRIMARY KEY,
+Name VARCHAR2(30),
+ContactNo VARCHAR2(15) NOT NULL,
+Emailid VARCHAR2(30))	
+
+Assignment 9:
+ALTER TABLE SUPPLIER ADD CITY VARCHAR2(10)
+
+Assignment 10:
+ALTER TABLE SUPPLIER DROP(Emailid)
+
+Assignment 11:
+CREATE TABLE City(
+City VARCHAR2(20) UNIQUE)
+
+Assignment 12:
+ALTER TABLE City DROP(City);
+
+Assignment 13:
+CREATE TABLE Address(
+HouseNo NUMBER,
+Street VARCHAR2(30),
+city VARCHAR2(20) REFERENCES City(city),
+zip  NUMBER(6) CHECK(zip>=0),
+state VARCHAR2(5),
+PRIMARY KEY(HouseNo, Street, city))
+
+Assignment 14:
+ALTER TABLE Address MODIFY state VARCHAR2(20);
+
+Assignment 15:
+INSERT INTO Shopper VALUES(101, 'Mark Jane', 'Male', 1234567890, 'Allen Street, New York')
+
+Assignment 2:
+INSERT INTO Article VALUES('A1001', 'Mouse', 500, 0, 'C')
+
+Assignment 17:
+INSERT INTO Store (StoreName, Location, ManagerName) VALUES('Loyal World', 'Infy Campus, Mysore', 'Rohan Kumar')
+
+Assignment 18:
+INSERT INTO Bill (BillNo, StoreName, Shopperid,	ArCode,	Amount,	BillDate, Quantity) VALUES(1001, 'Loyal World', 101,'A1001', 1000,'20-OCT-15', 2)
+
+Assignment 19:
+INSERT INTO Supplier VALUES('S501', 'Avaya Ltd', 9012345678, 'Mysore')
