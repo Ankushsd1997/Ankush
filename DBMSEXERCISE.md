@@ -173,3 +173,161 @@ INSERT INTO Bill (BillNo, StoreName, Shopperid,	ArCode,	Amount,	BillDate, Quanti
 
 Assignment 19:
 INSERT INTO Supplier VALUES('S501', 'Avaya Ltd', 9012345678, 'Mysore')
+
+Collaborative Assignment 43:
+SELECT Empid, Salary "Current Salary", ROUND((Salary*1.2), 2) "New Salary", Salary*0.2 "Incremented Amount" From Empdetails WHERE Designation='Manager'
+
+Collaborative Assignment 44:
+SELECT Itemcode FROM Item WHERE ABS(Reorderlevel-Qtyonhand)>50
+
+Exercise 31:
+Select Prodid, Pdesc, Price "Old_Price", ROUND((Price*0.775), 2) "New_Price" FROM Product WHERE Category='Sports'
+
+Exercise 32:
+SELECT Saleid, ROUND((ABS(MONTHS_BETWEEN(Sldate, SYSDATE))), 1) "MONTH_AGED" FROM Sale
+
+Exercise 33:
+SELECT ROUND((AVG(Price)), 2) "Avg", MIN(Price) "Min", MAX(Price) "Max", COUNT(Prodid) "Total" FROM Product
+
+Exercise 34:
+SELECT ' '||Sname||' is from '||Location||' '  "RESULT" FROM Salesman
+
+Exercise 35:******IMP******
+SELECT TO_CHAR((TO_DATE('Jan/10/2015', 'Mon/dd/yyyy')), 'Month') "MONTH", TO_NUMBER('2,50,000', '9,99,999') "AMOUNT" FROM dual
+
+Exercise 36:
+SELECT Prodid, Pdesc, Price FROM Product ORDER BY Price DESC, Prodid DESC
+
+Exercise 37:
+SELECT Prodid, Pdesc, Price FROM Product ORDER BY Pdesc
+
+Assignment 53:
+SELECT Itemcode, Price "Old Price", ROUND((Price*0.745), 2) "New Price" FROM Item WHERE Itemtype='FMCG'
+
+Assignment 54:
+SELECT Empid, Empname, Worksin FROM Empdetails WHERE Designation='Billing Staff'
+
+Assignment 8:
+SELECT Orderid, Status, NVL(Pymtmode, 'Payment yet not done') "PYMTMODE" FROM Orders
+
+Assignment 56:
+SELECT Descr FROM Item WHERE LENGTH(Descr)>15
+
+Assignment 57:
+SELECT SUBSTR(Roid, 2,4)  "NUMERICROID" FROM Retailoutlet
+
+Assignment 58:
+SELECT TO_CHAR(SYSDATE, 'Mon/DD/YYYY Day') "CURRENTDATE" FROM DUAL
+
+Assignment 9:
+SELECT COUNT(Orderid) "TOTALORDERSCOUNT", COUNT(Amountpaid)  "PAIDORDERSCOUNT" FROM Orders
+
+Assignment 60:
+SELECT Orderid, ABS(Orderdate-Pymtdate) "NOOFDAYS" FROM Orders
+
+Assignment 61:
+SELECT COUNT(DISTINCT(Itemtype)) NOOFITEMTYPES FROM Item
+
+Assignment 10:
+SELECT MAX(Salary) "MAXSAL", MIN(Salary) "MINSAL", SUM(Salary) "TOTALSAL", AVG(Salary) "AVGSAL" FROM Empdetails
+
+Assignment 64:
+SELECT COUNT(Itemcode) "NOOFITEMS" FROM Item
+
+Assignment 65:
+SELECT Orderid, MONTHS_BETWEEN(Orderdate, Pymtdate) "No of Months" FROM Orders
+
+Exercise 11:
+SELECT Prodid, SUM(Quantity) "QTY_SOLD" FROM Saledetail WHERE Quantity>1 GROUP BY  Prodid HAVING COUNT(Prodid)>1
+
+EXERCISE 44:
+SELECT E.Id, E.Ename, E.Dept, E.Compid, C.Make FROM Employee E INNER JOIN  Computer C ON E.Compid=C.Compid
+
+EXERCISE 13:
+SELECT E.Id, E.Ename,E.Compid,C.Make FROM Employee E INNER JOIN Computer C ON E.Compid=C.Compid WHERE C.Model = 'Precision' OR C.Model = 'Edge'
+
+COLLABORATIVE ASSIGNMENT 41:
+SELECT TO_CHAR(Qdate, 'Month') "MONTH" , COUNT(Quotationid) "QUOTATIONCOUNT" FROM Quotation GROUP BY TO_CHAR(Qdate, 'Month')
+
+EXERCISE 12:
+SELECT Location, COUNT(Sid) "NUMBER_SMAN" FROM Salesman GROUP BY Location
+
+EXERCISE 39:
+SELECT Category FROM Product GROUP BY Category HAVING COUNT(Prodid)>1
+
+ASSIGNMENT 11:
+SELECT Itemcode, AVG(Qtyavailable) "Average Quantity" FROM Retailstock GROUP BY Itemcode HAVING AVG(Qtyavailable)<75
+
+ASSIGNMENT 46:
+SELECT Pymtmode, COUNT(Pymtdate) "PYMTCOUNT" FROM Orders WHERE TO_CHAR(Pymtdate, 'YYYY')<2015  GROUP BY Pymtmode HAVING COUNT(Pymtdate)>1
+
+ASSIGNMENT 12:
+SELECT SNAME, AVG(Quotedprice) "Average quoted price" FROM Quotation WHERE Qstatus='Closed' GROUP BY SNAME HAVING AVG(Quotedprice)>500
+
+ASSIGNMENT 48:
+SELECT Itemtype, Category, ROUND((AVG(Price)), 2) "Average item price" FROM Item WHERE Itemtype='FMCG' OR Itemtype='Computer' GROUP BY Itemtype, Category HAVING ROUND((AVG(Price)), 2)<2000
+
+ASSIGNMENT 13:
+SELECT Job, AVG(Sal) "Average Salary" FROM Emp WHERE Job='MANAGER' OR Job='ANALYST'GROUP BY Job HAVING AVG(Sal)>1500
+
+Assignment 14:
+SELECT Job, Deptno, AVG(Sal) "AVGSALARY" FROM Emp WHERE (Deptno=10 OR Deptno=20) AND Sal>2000 GROUP BY Job, Deptno HAVING AVG(Sal)>2500
+
+ASSIGNMENT 63:
+SELECT Sname, AVG(Quotedprice) "Average quoted price" FROM Quotation WHERE Quotedprice>1000 AND Qstatus='Closed' GROUP BY  Sname HAVING AVG(Quotedprice)<4500
+
+COLLABORATIVE ASSIGNMENT 67:
+SELECT E.ENAME, E.SAL , D.Dname "DNAME" FROM Emp E INNER JOIN Dept D ON E.Deptno=D.Deptno WHERE SAL>2000
+
+COLLABORATIVE ASSIGNMENT 68:
+SELECT E.ENAME, D.Dname "DNAME" FROM Emp E INNER JOIN Dept D ON E.Deptno=D.Deptno WHERE Job='MANAGER'
+69:
+SELECT DISTINCT D.DNAME FROM Emp E INNER JOIN Dept D ON E.Deptno=D.Deptno WHERE Sal>1500 
+SELECT I.Itemcode, I.Descr, Q.Sname FROM Quotation Q INNER JOIN Item I ON I.Itemcode=Q.Itemcode
+SELECT C.Custid "Customer Id", C.Custname "Customer Name" FROM Customer C INNER JOIN Empdetails E ON C.Emailid=E.Emailid
+SELECT I.ITEMCODE, I.DESCR, I.CATEGORY,Q.Quotedprice FROM Item I INNER JOIN Quotation Q ON I.Itemcode=Q.Itemcode WHERE q.Qstatus='Accepted'
+SELECT R.ROID, I.DESCR, I.ITEMTYPE, R.UNITPRICE FROM Retailstock R INNER JOIN Item I ON R.Itemcode=I.Itemcode WHERE R.Unitprice>1500
+SELECT Q.Itemcode, Q.Sname, SUM(O.Qtyordered) "TOTALQUANTITY" FROM Quotation Q INNER JOIN Orders O ON Q.Quotationid=O.Quotationid GROUP BY Q.Itemcode, Q.Sname HAVING SUM(O.Qtyordered)>=100
+SELECT I.Itemcode, I.Descr FROM Item I INNER JOIN Quotation Q ON I.Itemcode=Q.Itemcode WHERE I.Price=Q.Quotedprice GROUP BY I.Itemcode, I.Descr HAVING COUNT(Quotationid)>1
+SELECT Q.Sname, Q.Quotationid FROM Quotation Q INNER JOIN Orders O ON Q.Quotationid=O.Quotationid WHERE ABS(Delivereddate-Orderdate)<=5
+SELECT C.Custname, P.Billamount FROM Customer C INNER JOIN Purchasebill P ON C.Custid=P.Custid WHERE P.Billamount>5000
+SELECT S.Saleid, S.Sldate FROM Sale S INNER JOIN Salesman L ON S.Sid=L.Sid WHERE L.Location='London'
+SELECT P1.Prodid, P1.Category, P1.Price FROM Product P1 INNER JOIN Product P2 ON P1.Price=P2.Price WHERE P1.Prodid<>P2.Prodid
+
+SELECT E1.Empname, E1.Designation, E1.Emailid FROM Empdetails E1 INNER JOIN Empdetails E2 ON E1.Worksin=E2.Worksin WHERE E2.Empname = 'George' AND E1.Empid<>E2.Empid
+
+SELECT C1.Custid, C1.Custname FROM Customer C1 INNER JOIN Customer C2 ON C1.Address=C2.Address WHERE C1.Custid<>C2.Custid
+
+SELECT I.Itemcode, I.Descr,R.Roid, R.Qtyavailable FROM Retailstock R INNER JOIN Item I ON R.Itemcode=I.Itemcode
+
+SELECT I.Descr, I.Itemtype, P.Billamount FROM Item I INNER JOIN Purchasebill P ON I.Itemcode=P.Itemcode WHERE P.Roid='R1001'
+
+SELECT C1.Custid, C1.Custname, C1.Custtype FROM Customer C1 INNER JOIN Customer C2 ON C1.Custtype=C2.Custtype WHERE C2.Custid=2004 AND C1.Custid<>C2.Custid
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
