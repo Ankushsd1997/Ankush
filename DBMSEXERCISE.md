@@ -304,6 +304,25 @@ SELECT I.Descr, I.Itemtype, P.Billamount FROM Item I INNER JOIN Purchasebill P O
 
 SELECT C1.Custid, C1.Custname, C1.Custtype FROM Customer C1 INNER JOIN Customer C2 ON C1.Custtype=C2.Custtype WHERE C2.Custid=2004 AND C1.Custid<>C2.Custid
 
+SELECT Saleid, Sldate FROM Sale WHERE Sldate=(SELECT MAX(Sldate) FROM Sale)
+
+SELECT Sname FROM Salesman WHERE Sid IN (SELECT Sid FROM Sale GROUP BY Sid HAVING COUNT(Saleid)>=2);
+
+SELECT Prodid, Pdesc FROM Product WHERE Prodid IN (SELECT Prodid FROM Saledetail GROUP BY Prodid HAVING SUM(Quantity)=(SELECT MIN(SUM(Quantity)) FROM Saledetail GROUP BY Prodid))
+
+SELECT Itemcode, Itemtype, Descr, Category FROM Item WHERE Itemcode IN (SELECT Itemcode FROM Quotation WHERE Quotedprice =(SELECT MIN(Quotedprice) FROM Quotation WHERE Qstatus='Rejected'  ))
+
+SELECT Itemcode, Descr FROM ITEM WHERE Itemcode IN (SELECT Itemcode FROM Quotation WHERE Quotedprice=(SELECT MAX(Quotedprice) FROM Quotation WHERE Qstatus='Closed' OR Qstatus='Rejected' ))
+
+SELECT Itemcode, descr, Price FROM Item WHERE Price= (select MAX(Price) FROM ITEM WHERE PRICE < (SELECT MAX(Price) FROM ITEM))
+
+SELECT Ename, Job FROM Emp WHERE Empno IN (SELECT Empno FROM Empvehicle)
+
+SELECT Ename FROM Emp WHERE Sal =(SELECT MAX(Sal) FROM Emp)
+
+
+
+
 
 
 
